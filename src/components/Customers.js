@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Customer.css";
+import ExportReactCSV from "./ExportReactCSV";
 const Customers = () => {
   let [row, setRow] = useState(3);
+  let [obj, setObj] = useState({});
   let custs = [];
   for (let i = 0; i <= row; i++) {
     custs.push({
@@ -16,9 +18,7 @@ const Customers = () => {
     <div className="container">
       <div className="d-flex justify-content-between">
         <h3>Customers</h3>
-        <a href="#d" className="btn btn-warning mb-3">
-          Export
-        </a>
+        <ExportReactCSV csvData={custs} fileName={"hello"} />
       </div>
 
       <table className="table table-striped">
@@ -35,19 +35,19 @@ const Customers = () => {
         <tbody>
           {custs.map((single, index) => {
             const changeFirstName = (e) => {
-              console.log((custs[index].firstName = e.target.value));
+              custs[index].firstName = e.target.value;
             };
             const changeLastName = (e) => {
-              console.log((custs[index].lastName = e.target.value));
+              custs[index].lastName = e.target.value;
             };
             const changeEmail = (e) => {
-              console.log((custs[index].email = e.target.value));
+              custs[index].email = e.target.value;
             };
             const changeAddress = (e) => {
-              console.log((custs[index].address = e.target.value));
+              custs[index].address = e.target.value;
             };
             const chagneZipCode = (e) => {
-              console.log((custs[index].zipcode = e.target.value));
+              custs[index].zipcode = e.target.value;
             };
             return (
               <tr key={index}>
@@ -67,13 +67,25 @@ const Customers = () => {
                   />
                 </td>
                 <td>
-                  <input type="text" onChange={changeEmail} defaultValue={single.email} />
+                  <input
+                    type="text"
+                    onChange={changeEmail}
+                    defaultValue={single.email}
+                  />
                 </td>
                 <td>
-                  <input type="text" onChange={changeAddress} defaultValue={single.address} />
+                  <input
+                    type="text"
+                    onChange={changeAddress}
+                    defaultValue={single.address}
+                  />
                 </td>
                 <td>
-                  <input type="text" onChange={chagneZipCode} defaultValue={single.zipcode} />
+                  <input
+                    type="text"
+                    onChange={chagneZipCode}
+                    defaultValue={single.zipcode}
+                  />
                 </td>
               </tr>
             );
